@@ -5,7 +5,7 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "RocketLink-S Egne Blokker TEST": "github:oysa88/rocketlink-s-egne-blokker-test#b6d14bda6ea90876a1c07ae18c0347537c212675"
+        "RocketLink-S Egne Blokker TEST": "github:oysa88/rocketlink-s-egne-blokker-test#6469f6df8f3f1d68ebd1fa71502aed7e2705ee87"
     },
     "files": [
         "main.blocks",

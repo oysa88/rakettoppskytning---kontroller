@@ -4,6 +4,11 @@ function lys () {
     } else {
         RocketLink.armStatusLys(false)
     }
+    if (armStatusLP) {
+        RocketLink.armLPStatusLys(true)
+    } else {
+        RocketLink.armLPStatusLys(false)
+    }
     if (linkStatus) {
         RocketLink.linkStatusLys(true)
     } else {
@@ -24,41 +29,35 @@ input.onButtonPressed(Button.A, function () {
 })
 function initialize () {
     armStatus = false
+    armStatusLP = false
     linkStatus = false
     klar = false
 }
 input.onButtonPressed(Button.AB, function () {
-    radio.sendString("oppskytning")
+    if (klar) {
+        radio.sendString("oppskytning")
+    }
 })
 radio.onReceivedString(function (receivedString) {
-    if (receivedString == "test link") {
-        radio.sendString("link OK")
-    }
     if (receivedString == "link OK") {
         linkStatus = true
     }
-    if (armStatus) {
-        if (receivedString == "oppskytning") {
-            pins.digitalWritePin(DigitalPin.P0, 1)
-            basic.pause(200)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-        }
+    if (receivedString == "armLP OK") {
+        armStatusLP = true
     }
 })
 input.onButtonPressed(Button.B, function () {
     radio.sendString("test link")
-    sistSettAktiv = input.runningTime()
     linkStatus = false
 })
-let sistSettAktiv = 0
 let klar = false
 let linkStatus = false
+let armStatusLP = false
 let armStatus = false
 radio.setGroup(1)
-let oppdateringsfrekvens = 200
 initialize()
 basic.forever(function () {
-    if (armStatus && linkStatus) {
+    if (armStatus && armStatusLP && linkStatus) {
         klar = true
     } else {
         klar = false
