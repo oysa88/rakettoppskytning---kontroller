@@ -45,6 +45,9 @@ radio.onReceivedString(function (receivedString) {
     if (receivedString == "armLP OK") {
         armStatusLP = true
     }
+    if (receivedString == "armLP ikke OK") {
+        armStatusLP = false
+    }
 })
 input.onButtonPressed(Button.B, function () {
     radio.sendString("test link")
